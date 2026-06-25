@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ORANGE跳转站</title>
+    <style>
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            color: #333;
+        }
+        .container {
+            text-align: center;
+            padding: 40px;
+        }
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .jump-btn {
+            padding: 18px 40px;
+            background-color: #000000;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .jump-btn:hover {
+            background-color: #333;
+            transform: translateY(-3px);
+        }
+        .footer {
+            margin-top: 60px;
+            font-size: 14px;
+            color: #999;
+            letter-spacing: 1px;
+        }
+        .countdown {
+            font-size: 14px;
+            color: #888;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ORANGE Zplay</h1>
+        <p>点击下方按钮跳转至作品面</p>
+        <!-- 跳转至链接1的目标地址 -->
+        <a href="https://orange-6lw.pages.dev/1" class="jump-btn" id="jumpBtn" target="_blank">立即跳转</a>
+        
+        <!-- 倒计时提示 -->
+        <div class="countdown" id="countdown">
+            10秒后自动跳转...
+        </div>
+        
+        <!-- 版权信息 -->
+        <div class="footer">
+            © ORANGE 2026 版权所有 Zcloud提供技术支持
+        </div>
+    </div>
+
+    <script>
+        // 目标URL
+        const targetUrl = "https://orange-6lw.pages.dev/2";
+        let countdown = 10;
+        let timer = null;
+        
+        // 更新倒计时显示
+        function updateCountdown() {
+            const countdownElement = document.getElementById('countdown');
+            if (countdown > 0) {
+                countdownElement.textContent = `${countdown}秒后自动跳转...`;
+                countdown--;
+            } else {
+                clearInterval(timer);
+                window.location.href = targetUrl;
+            }
+        }
+        
+        // 页面加载完成后开始倒计时
+        document.addEventListener('DOMContentLoaded', function() {
+            timer = setInterval(updateCountdown, 1000);
+            
+            // 如果用户点击了跳转按钮，清除定时器
+            document.getElementById('jumpBtn').addEventListener('click', function() {
+                clearInterval(timer);
+                document.getElementById('countdown').textContent = '正在跳转...';
+            });
+        });
+    </script>
+</body>
+</html>
